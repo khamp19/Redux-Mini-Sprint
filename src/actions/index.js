@@ -1,5 +1,8 @@
 export const INCREMENT = 'INCREMENT';
 export const DECREMENT = 'DECREMENT';
+export const FETCHING = 'FETCHING';
+export const ERROR = 'ERROR';
+export const COMPLETE = 'COMPLETE';
 
 // Our action creators will return
 // an action packet that our reducer will
@@ -23,3 +26,16 @@ export const decrement = () => {
     payload: 1
   }
 };
+
+export const asyncIncrement = () => {
+  const action = { type: 'INCREMENT', payload: 5 }
+  //fake server call- axios.get goes here
+  return dispatch => {
+    dispatch({ type: FETCHING});
+    setTimeout(()=> {
+      dispatch(action)
+      dispatch({ type: COMPLETE });
+    }, 2000)
+  }
+}
+
